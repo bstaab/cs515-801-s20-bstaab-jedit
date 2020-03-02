@@ -113,6 +113,8 @@ public class StatusBarOptionPane extends AbstractOptionPane
 		view.status.show-caret-virtual -- true shows virtual offset in line for caret (virtual)
 		view.status.show-caret-offset -- true shows caret offset from start of buffer (caretpos)
 		view.status.show-caret-bufferlength -- true shows length of buffer (bufferlength)
+		view.status.show-caret-word-offset -- true shows caret offset in words from start of buffer (wordOffset)
+		view.status.show-caret-bufferWordLength -- true shows length in words of buffer (bufferWordLength)
 		*/
 		showCaretLineNumber = new JCheckBox(jEdit.getProperty("options.status.caret.linenumber", "Show caret line number"),
 			jEdit.getBooleanProperty("view.status.show-caret-linenumber", true));
@@ -129,11 +131,20 @@ public class StatusBarOptionPane extends AbstractOptionPane
 		showCaretBufferLength = new JCheckBox(jEdit.getProperty("options.status.caret.bufferlength", "Show length of file"),
 			jEdit.getBooleanProperty("view.status.show-caret-bufferlength", true));
 		showCaretBufferLength.setName("showCaretBufferLength");
+		showCaretWordOffset = new JCheckBox(jEdit.getProperty("options.status.caret.wordOffset", "Show caret offset in words from start of file"),
+			jEdit.getBooleanProperty("view.status.show-caret-word-offset", true));
+		showCaretWordOffset.setName("showCaretWordOffset");
+		showCaretBufferWordLength = new JCheckBox(jEdit.getProperty("options.status.caret.bufferWordLength", "Show length of file in words"),
+			jEdit.getBooleanProperty("view.status.show-caret-bufferWordLength", true));
+		showCaretBufferLength.setName("showCaretBufferWordLength");
+				
 		optionsPanel.addComponent(showCaretLineNumber);
 		optionsPanel.addComponent(showCaretDot);
 		optionsPanel.addComponent(showCaretVirtual);
 		optionsPanel.addComponent(showCaretOffset);
 		optionsPanel.addComponent(showCaretBufferLength);
+		optionsPanel.addComponent(showCaretWordOffset);
+		optionsPanel.addComponent(showCaretBufferWordLength);
 
 		//}}}
 
@@ -237,6 +248,8 @@ public class StatusBarOptionPane extends AbstractOptionPane
 		jEdit.setBooleanProperty("view.status.show-caret-virtual", showCaretVirtual.isSelected());
 		jEdit.setBooleanProperty("view.status.show-caret-offset", showCaretOffset.isSelected());
 		jEdit.setBooleanProperty("view.status.show-caret-bufferlength", showCaretBufferLength.isSelected());
+		jEdit.setBooleanProperty("view.status.show-caret-word-offset", showCaretWordOffset.isSelected());
+		jEdit.setBooleanProperty("view.status.show-caret-bufferWordLength", showCaretBufferWordLength.isSelected());
 
 	} //}}}
 
@@ -262,6 +275,8 @@ public class StatusBarOptionPane extends AbstractOptionPane
 	private JCheckBox showCaretVirtual;
 	private JCheckBox showCaretOffset;
 	private JCheckBox showCaretBufferLength;
+	private JCheckBox showCaretWordOffset;
+	private JCheckBox showCaretBufferWordLength;
 	//}}}
 
 	//{{{ updateButtons() method

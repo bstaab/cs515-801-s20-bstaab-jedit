@@ -370,6 +370,14 @@ public class StatusBar extends JPanel
 				return;
 
 			int bufferLength = buffer.getLength();
+			
+			// Conditionally calculate the offset in words from the start to current caret position
+			int bufferWordOffset = jEdit.getBooleanProperty("view.status.show-caret-word-offset", true) ? 
+					buffer.getWordOffset(caretPosition) : 0;
+			
+			// Conditionally calculate the total number of words in the buffer
+			int bufferWordLength = jEdit.getBooleanProperty("view.status.show-caret-bufferWordLength", true) ? 
+					buffer.getWordCount() : 0;					
 
 			buffer.getText(start,dot,seg);
 			int virtualPosition = StandardUtilities.getVirtualWidth(seg,
@@ -416,6 +424,27 @@ public class StatusBar extends JPanel
 			{
 				buf.append('(');
 				buf.append(bufferLength);
+				buf.append(')');
+			}
+			if (jEdit.getBooleanProperty("view.status.show-caret-word-offset", true) &&
+				jEdit.getBooleanProperty("view.status.show-caret-bufferWordLength", true))
+			{
+				buf.append('(');
+				buf.append(bufferWordOffset);
+				buf.append('/');
+				buf.append(bufferWordLength);
+				buf.append(')');
+			}
+			else if (jEdit.getBooleanProperty("view.status.show-caret-word-offset", true))
+			{
+				buf.append('(');
+				buf.append(bufferWordOffset);
+				buf.append(')');
+			}
+			else if (jEdit.getBooleanProperty("view.status.show-caret-bufferWordLength", true))
+			{
+				buf.append('(');
+				buf.append(bufferWordLength);
 				buf.append(')');
 			}
 

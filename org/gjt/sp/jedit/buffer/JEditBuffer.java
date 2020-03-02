@@ -814,6 +814,34 @@ public class JEditBuffer
 	} //}}}
 
 	//}}}
+	
+	//{{{ buffer 'word' methods
+	
+	//{{{ getWordOffset() method
+	public int getWordOffset(int caretPosition)
+	{
+		String tmpString = getText(0, caretPosition);
+		if(tmpString == null || tmpString.isEmpty()){
+            return 0;
+        }
+        
+        String[] words = tmpString.split("\\s+");
+        return words.length;
+	} //}}}
+	
+	//{{{ getWordCount() method
+	public int getWordCount()
+	{
+		String tmpString = getText();
+		if(tmpString == null || tmpString.isEmpty()){
+            return 0;
+        }
+        
+        String[] words = tmpString.split("\\s+");
+        return words.length;
+	} //}}}	
+	
+	//}}}
 
 	//{{{ Indentation
 
