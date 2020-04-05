@@ -260,10 +260,12 @@ public class Native2ASCIIEncoding implements Encoding
 			// no unicode escape with non-hex characters in positions 3-6
 			for (int i = 1; i < 5; i++)
 			{
-				char e = escape[i];
-				if (!(((e >= '0') && (e <= '9')) || ((e >= 'a') && (e <= 'f')) || ((e >= 'A') && (e
-														  <= 'F'))))
-				{
+				char e = Character.toLowerCase(escape[i]);
+				if (Character.isDigit(e)) {
+					continue;
+				} else if ((e >= 'a') && (e <= 'f')) {
+					continue;
+				}else {
 					if (permissive)
 					{
 						escaped = true;
